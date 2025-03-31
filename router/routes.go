@@ -13,6 +13,8 @@ func InitializeRoutes(router *gin.Engine) {
 		Name     string
 		Email    string
 		Password string
+		Profile  string
+		About    string
 	}
 
 	type Posts struct {
@@ -97,6 +99,11 @@ func InitializeRoutes(router *gin.Engine) {
 					ctx.JSON(http.StatusOK, user[i])
 				}
 			}
+		})
+
+		//GET todos usuarios
+		RUser.GET("/allusers", func(ctx *gin.Context) {
+			ctx.JSON(http.StatusOK, user)
 		})
 	}
 
