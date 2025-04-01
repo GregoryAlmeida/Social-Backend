@@ -17,6 +17,7 @@ func InitializeRoutes(router *gin.Engine) {
 	}
 
 	type Posts struct {
+		Profile string
 		Name    string
 		Message string
 	}
@@ -123,10 +124,12 @@ func InitializeRoutes(router *gin.Engine) {
 
 	posts := []Posts{
 		{
+			Profile: "",
 			Name:    "Admin Gregs",
 			Message: "Bem vindo!",
 		},
 		{
+			Profile: "",
 			Name:    "Admin Gregs",
 			Message: "Você pode iniciar suas postagens aqui...",
 		},
