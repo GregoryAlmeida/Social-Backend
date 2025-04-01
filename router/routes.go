@@ -1,7 +1,6 @@
 package router
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -63,13 +62,11 @@ func InitializeRoutes(router *gin.Engine) {
 		RUser.POST("/cadastrar", func(ctx *gin.Context) {
 			var newUser User
 			ctx.ShouldBindJSON(&newUser)
-
 			user = append(user, newUser)
 			ctx.JSON(http.StatusOK, gin.H{
 				"Message": "OK",
 			})
 
-			fmt.Println(user)
 		})
 
 		//Verificar se possui usuario atraves do email
@@ -104,6 +101,23 @@ func InitializeRoutes(router *gin.Engine) {
 		//GET todos usuarios
 		RUser.GET("/allusers", func(ctx *gin.Context) {
 			ctx.JSON(http.StatusOK, user)
+		})
+
+		RUser.POST("/atualizarDados/:id", func(ctx *gin.Context) {
+			id := ctx.Param("id")
+			var newData User
+
+			ctx.ShouldBindJSON(&newData)
+
+			for i, v := range user {
+				if v.Id == id {
+					user[i] = newData
+				}
+			}
+
+			ctx.JSON(http.StatusOK, gin.H{
+				"Message": "OK",
+			})
 		})
 	}
 
